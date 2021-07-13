@@ -49,7 +49,7 @@ export const Wrapper = styled.button<{
     padding: 6px 8px 4px;
     border: 1px solid ${ props => THEME[props.variant].background }; 
     color: ${ props => THEME[props.variant].color };
-    background: ${props => THEME[props.variant].background };
+    background: ${ props => THEME[props.variant].background };
     
     &:hover,
     &:focus {
@@ -57,8 +57,8 @@ export const Wrapper = styled.button<{
     }
 
     &:disabled {
-        background: ${props => THEME[props.variant].disabled.background };
-        color: ${props => THEME[props.variant].disabled.color };
+        background: ${ props => THEME[props.variant].disabled.background };
+        color: ${ props => THEME[props.variant].disabled.color };
 
         pointer-events: none;
         border-color: transparent;
