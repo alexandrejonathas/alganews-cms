@@ -9,8 +9,10 @@ export const Wrapper = styled.table`
 
 export const Heading = styled.thead`
     background: ${ transparentize(0.95, '#274060') };
+    text-align: left;
 `
 export const HeadingRow = styled.tr`
+    text-align: left;
 `
 
 export const HeadingCell = styled.th`
@@ -18,7 +20,7 @@ export const HeadingCell = styled.th`
     font-size: 14px;
 `
 
-export const Body = styled.body``
+export const Body = styled.tbody``
 
 export const BodyRow = styled.tr``
 
