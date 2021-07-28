@@ -21,87 +21,6 @@ type Data = {
   actions: string
 }
 
-export function Default () {
-  const data = useMemo<Data[]>(() => [
-    {
-        preview: <Icon size="14px" color="#09F" path={ mdiOpenInNew } />,
-        col1: 'Hello',
-        col2: 'World',
-        actions: 'Açoes'
-    },
-    {
-        preview: <Icon size="14px" color="#09F" path={ mdiOpenInNew } />,
-        col1: 'react-table',
-        col2: 'rocks',
-        actions: 'Açoes'
-    },
-    {
-        preview: <Icon size="14px" color="#09F" path={ mdiOpenInNew } />,
-        col1: 'whatever',
-        col2: 'you want',
-        actions: 'Açoes'
-    }
-], [])
-
-const columns = useMemo<Column<Data>[]>(() => [
-    {
-        Header: '',
-        accessor: 'preview'
-    },
-    {
-        Header: 'Column 1',
-        accessor: 'col1',
-        width: 320,
-        Cell: (row) => <div style={{ textAlign: 'right' }} >{row.value}</div>
-        
-    },
-    {
-        Header: 'Column 2',
-        accessor: 'col2',
-        Cell: (row) => <div style={{ textAlign: 'center' }} >{row.value}</div>
-    },
-    {
-        Header: 'Ações',
-        accessor: 'actions'
-    }
-], []) 
-
-  const instance = useTable<Data>({data, columns})
-
-  return <Table<Data> instance={instance} />
-}
-
-export function NoData () {
-  const data = useMemo<Data[]>(() => [], [])
-
-const columns = useMemo<Column<Data>[]>(() => [
-    {
-        Header: '',
-        accessor: 'preview'
-    },
-    {
-        Header: 'Column 1',
-        accessor: 'col1',
-        width: 320,
-        Cell: (row) => <div style={{ textAlign: 'right' }} >{row.value}</div>
-        
-    },
-    {
-        Header: 'Column 2',
-        accessor: 'col2',
-        Cell: (row) => <div style={{ textAlign: 'center' }} >{row.value}</div>
-    },
-    {
-        Header: 'Ações',
-        accessor: 'actions'
-    }
-], []) 
-
-  const instance = useTable<Data>({data, columns})
-
-  return <Table<Data> instance={instance} />
-}
-
 export function Posts () {
   type Post = {
     id: number
@@ -200,4 +119,35 @@ export function Posts () {
   const instance = useTable<Post>({data, columns})
 
   return <Table<Post> instance={instance} />
+}
+
+export function WithoutData () {
+  const data = useMemo<Data[]>(() => [], [])
+
+const columns = useMemo<Column<Data>[]>(() => [
+    {
+        Header: '',
+        accessor: 'preview'
+    },
+    {
+        Header: 'Column 1',
+        accessor: 'col1',
+        width: 320,
+        Cell: (row) => <div style={{ textAlign: 'right' }} >{row.value}</div>
+        
+    },
+    {
+        Header: 'Column 2',
+        accessor: 'col2',
+        Cell: (row) => <div style={{ textAlign: 'center' }} >{row.value}</div>
+    },
+    {
+        Header: 'Ações',
+        accessor: 'actions'
+    }
+], []) 
+
+  const instance = useTable<Data>({data, columns})
+
+  return <Table<Data> instance={instance} />
 }
