@@ -102,8 +102,6 @@ const columns = useMemo<Column<Data>[]>(() => [
   return <Table<Data> instance={instance} />
 }
 
-
-
 export function Posts () {
   type Post = {
     id: number
@@ -168,7 +166,7 @@ export function Posts () {
         width: 40
     },
     {
-        Header: 'Artigo',
+        Header: () => <div style={{ textAlign: 'left' }}>Artigo</div>,
         accessor: 'title',
         width: 320,
         Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '8px' }} >
@@ -178,12 +176,12 @@ export function Posts () {
         
     },
     {
-        Header: 'Views',
+        Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
         accessor: 'views',
         Cell: (props) => <div style={{ textAlign: 'right', fontWeight: 700, fontFamily: '"Roboto mono", monospace' }} >{props.value.toLocaleString('pt-BR')}</div>
     },
     {
-        Header: 'Conversões',
+        Header: () => <div style={{ textAlign: 'left' }}>Conversões</div>,
         accessor: 'conversions',
         Cell: (props) => <div style={{ display: 'flex', gap: '8px', fontWeight: 700, fontFamily: '"Roboto mono", monospace' }} >
           <span>{props.value.thousands}K</span>
@@ -191,7 +189,8 @@ export function Posts () {
         </div>
     },
     {
-        Header: 'Ações',
+        id: Math.random().toString(),
+        Header: () => <div style={{ textAlign: 'right' }}>Ações</div>,
         Cell: () => <div style={{ textAlign: 'right' }} >
             todo: Ações  
         </div>
