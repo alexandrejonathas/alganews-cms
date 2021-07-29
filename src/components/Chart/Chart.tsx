@@ -1,5 +1,8 @@
 import { transparentize } from 'polished';
 import { Line } from 'react-chartjs-2'
+import Heading from '../Typography/Heading';
+
+import * as C from './Chart.styles'
 
 const data = {
     labels: ['1', '2', '3', '4', '5', '6'],
@@ -40,7 +43,7 @@ yarn add @types/chart.js@2.9.32
 //Para manipular a altura pela propriedade height do chart é preciso setar maintainAspectRatio para false
 
 const options: Chart.ChartOptions = {
-    //maintainAspectRatio: false,
+    maintainAspectRatio: true,
     elements: {
       line: {
         tension: 0
@@ -79,8 +82,13 @@ export interface ChartProps {
 }
 
 export default function Chart () {
-    return <div style={{ width: 600, height: 400}}>
-      <Line data={data} options={options} />
-    </div>
+    return <C.Wrapper style={{ width: 640 }}>
+      <div style={{ marginBottom: 16}}>
+        <Heading level={3}>
+          {'Média de performance nos últimos 12 meses'}
+        </Heading>
+      </div>
+      <Line width={600} height={139} data={data} options={options} />
+    </C.Wrapper>
 };
   
