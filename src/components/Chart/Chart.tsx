@@ -1,32 +1,9 @@
 import { transparentize } from 'polished';
 import { Line } from 'react-chartjs-2'
 import Heading from '../Typography/Heading';
+import NoData from '../NoData/NoData';
 
 import * as C from './Chart.styles'
-
-const data = {
-    labels: ['1', '2', '3', '4', '5', '6'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [800, 500, 650, 1000, 700, 900],
-        fill: true,
-        backgroundColor: '#0099FF',
-        borderColor: transparentize(0.75, '#0099FF'),
-        borderWidth: 0.5,
-        yAxisID: 'cashflow',
-      },
-      {
-        label: 'Despesas',
-        data: [600, 700, 500, 1100, 750, 850],
-        fill: true,
-        backgroundColor: '#274060',
-        borderColor: transparentize(0.75, '#274060'),
-        borderWidth: 0.5,
-        yAxisID: 'cashflow',
-      },
-    ],
-};
 
 /*
 Execute este comando para instalar o Chart.js e o ReactChart.js 2 no seu projeto com Yarn:
@@ -78,17 +55,21 @@ const options: Chart.ChartOptions = {
 };
 
 export interface ChartProps {
-
+  title: string,
+  data: Chart.ChartData
 }
 
-export default function Chart () {
+export default function Chart ({ title, data }: ChartProps) {
     return <C.Wrapper style={{ width: 640 }}>
       <div style={{ marginBottom: 16}}>
         <Heading level={3}>
-          {'Média de performance nos últimos 12 meses'}
+          {title}
         </Heading>
       </div>
-      <Line width={600} height={139} data={data} options={options} />
+      { data 
+          ? <Line width={600} height={139} data={data} options={options} />
+          : <NoData height={139}></NoData>
+      }
     </C.Wrapper>
 };
   
