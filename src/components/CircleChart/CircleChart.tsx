@@ -35,6 +35,28 @@ export default function CircleChart (props : CircleChartProps) {
 
 
     return <C.Wrapper>
-        todo: circle chart
+        <C.SvgWrapper style={{ width: props.size, height: props.size}}>
+            <C.Svg width={props.size} height={props.size} >
+                <C.CircleBG cy={CENTER} cx={CENTER} r={RADIUS} />
+                    <C.Circle
+                        fill='none'
+                        cy={CENTER} 
+                        cx={CENTER} 
+                        r={RADIUS} 
+                        stroke={STROKE_COLOR} 
+                        strokeWidth={STROKE_WIDTH}
+                        strokeDasharray={CIRCUNFERENCE}
+                        strokeDashoffset={offset}>
+                    </C.Circle>
+            </C.Svg>
+            <C.Percentage theme={props.theme}>
+                { props.progress }%
+            </C.Percentage>
+        </C.SvgWrapper>
+        {
+            props.caption && <C.Caption theme={props.theme}>
+                { props.caption }
+            </C.Caption>
+        }
     </C.Wrapper>
 }

@@ -15,11 +15,11 @@ export const SvgWrapper = styled.div`
     }
 `
 
-export const Svg = styled.div`
+export const Svg = styled.svg`
     transform: rotate(90deg);
 `
 
-export const Circle = styled.div`
+export const Circle = styled.circle`
     transition: stroke-dashoffset 850ms ease;
 `
 
@@ -27,9 +27,9 @@ export const CircleBG = styled.circle.attrs({
     fill: '#FFFFFF',
 })``
 
-export const Percentage = styled.span`
+export const Percentage = styled.span<{theme: string}>`
     position: absolute;
-    top: 10;
+    top: 0;
     left: 0;
 
     display: flex;
@@ -39,15 +39,15 @@ export const Percentage = styled.span`
     width: 100%;
     height: 100%;
 
-    color: #274060;
+    color: ${props => props.theme === 'primary' ? '#0099FF' : '#274060' };
 
     font-weight: 900;
     font-size: 1.2em;
 `
 
-export const Caption = styled.span`
+export const Caption = styled.span<{theme: string}>`
     font-size: 1em;
     font-weight: 400;
     text-transform: lowercase;
-    color: #274060;
+    color: ${props => props.theme === 'primary' ? '#0099FF' : '#274060' };
 `
