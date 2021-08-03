@@ -1,7 +1,6 @@
 import { mdiDelete, mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
 import { ChangeEvent, useState } from 'react'
-import Button from '../Button/Button'
 import * as IU from './ImageUpload.styles'
 
 export interface ImageUploadProps {
@@ -29,12 +28,10 @@ export default function ImageUpload (props: ImageUploadProps) {
     if(filePreview){
         return <IU.ImagePreviewWrapper >
             <IU.ImagePreview preview={filePreview} >
-                <Button 
-                    variant={'primary'} 
-                    label={'Remover imagem'}
-                    onClick={ () => setFilePreview(null) } >
+                <IU.Button onClick={ () => setFilePreview(null) } >
+                    Remover imagem
                     <Icon size={'24px'} path={mdiDelete} />    
-                </Button>
+                </IU.Button>
             </IU.ImagePreview>    
         </IU.ImagePreviewWrapper>
     }

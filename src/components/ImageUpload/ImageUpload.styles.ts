@@ -1,10 +1,7 @@
 import styled from "styled-components"
-import { Wrapper as Button } from '../Button/Button.styles'
-
 
 export const Wrapper = styled.div`
 `
-
 export const Label = styled.label`
     background: #0099FF;
     color: #FFFFFF;
@@ -15,13 +12,12 @@ export const Label = styled.label`
     display: flex;
     align-items: center;
     grid-gap: 12px;
-`
 
+
+`
 export const Input = styled.input`
     display: none;
 `
-
-
 export const ImagePreview = styled.div<{ preview: string }>`
     height: 100%;
     background-image: url(${ props => props.preview });
@@ -32,6 +28,21 @@ export const ImagePreview = styled.div<{ preview: string }>`
     justify-content: center;
     align-items: center;
     
+`
+export const Button = styled.button`
+    padding: 16px;
+    gap: 10px;
+
+    border: none;
+    background-color: #FFFFFF;
+    color: #274060;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const ImagePreviewWrapper = styled.div`
@@ -49,7 +60,21 @@ export const ImagePreviewWrapper = styled.div`
         }
 
         ${Button} {
-            display: block;         
+            display: block;
+            
+            padding: 16px;
+            gap: 10px;
+
+            border: none;
+            background-color: #FFFFFF;
+            color: #274060;
+
+            font-size: 1.2em;
+            font-weight: 600;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;                     
         }
     }
 
