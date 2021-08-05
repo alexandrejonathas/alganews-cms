@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './views/Home.view';
+import Contact from './views/Contact.view';
+import NotFound from './views/NotFound.view';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Switch>
+        <Route path={'/'} exact component={ Home } />
+        <Route path={'/contact'} component={ Contact } />
+        <Route component={ NotFound } />                
+      </Switch>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
