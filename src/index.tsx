@@ -8,7 +8,8 @@ import Home from './views/Home.view';
 import Contact from './views/Contact.view';
 import NotFound from './views/NotFound.view';
 import UserView from './views/User.view';
-import CalcView from './views/Calc.view';
+import SomaView from './views/Soma.view';
+import CalculadoraView from './views/Calculadora.view';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +25,8 @@ ReactDOM.render(
         <Route path={'/'} exact component={ Home } />
         <Route path={'/contact'} component={ Contact } />
         <Route path={'/user/:userId'} component={ UserView } />
-        <Route path={'/calculadora/:a/:b'} component={ CalcView } />
+        <Route path={'/soma/:a/:b'} component={ SomaView } />
+        <Route path={'/calculadora'} component={ CalculadoraView } />
         <Route component={ NotFound } />                
       </Switch>
     </BrowserRouter>

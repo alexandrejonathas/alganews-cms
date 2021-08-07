@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-export default function CalcView () {
+export default function SomaView () {
 
     const params = useParams<{ a: string, b: string}>()
 
