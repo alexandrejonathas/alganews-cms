@@ -1,7 +1,10 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
+import usePageTitle from "../../core/hooks/usePageTitle"
 
 export default function UserView () {
+
+    usePageTitle('User')
 
     const params = useParams<{ userId: string }>()
 

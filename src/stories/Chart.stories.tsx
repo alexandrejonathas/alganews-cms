@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import Chart, { ChartProps } from '../components/Chart/Chart';
+import Chart, { ChartProps } from '../app/components/Chart/Chart';
 import { transparentize } from 'polished';
 
 export default {
