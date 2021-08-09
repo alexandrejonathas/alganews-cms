@@ -10,21 +10,16 @@ import NotFound from './views/NotFound.view';
 import UserView from './views/User.view';
 import SomaView from './views/Soma.view';
 import CalculadoraView from './views/Calculadora.view';
+import NavBar from './components/NavBar';
 
 ReactDOM.render(
   <React.StrictMode>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/contact">Contato</a></li>
-        <li><a href="/user">Usuário</a></li>
-      </ul>
-    </nav>
     <BrowserRouter>
+      <NavBar />
       <Switch>
         <Route path={'/'} exact component={ Home } />
         <Route path={'/contact'} component={ Contact } />
-        <Route path={'/user/:userId'} component={ UserView } />
+        <Route path={'/user'} component={ UserView } />
         <Route path={'/soma/:a/:b'} component={ SomaView } />
         <Route path={'/calculadora'} component={ CalculadoraView } />
         <Route component={ NotFound } />                
