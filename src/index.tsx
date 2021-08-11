@@ -9,12 +9,12 @@ import NotFound from './app/views/NotFound.view';
 import UserView from './app/views/User.view';
 import SomaView from './app/views/Soma.view';
 import CalculadoraView from './app/views/Calculadora.view';
-import NavBar from './app/components/NavBar';
+
+import GlobalStyle from './core/globalStyles'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NavBar />
       <Switch>
         <Route path={'/'} exact component={ Home } />
         <Route path={'/contact'} component={ Contact } />
@@ -24,6 +24,9 @@ ReactDOM.render(
         <Route component={ NotFound } />                
       </Switch>
     </BrowserRouter>
+    
+    <GlobalStyle />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
