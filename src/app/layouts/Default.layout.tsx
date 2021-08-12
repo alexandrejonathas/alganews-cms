@@ -1,4 +1,6 @@
+import Logo from '../components/Logo'
 import NavBar from '../components/NavBar'
+import SessionController from '../components/SessionController'
 import * as DL from './Default.layout.styles'
 
 export interface DefaultLayoutProps {
@@ -7,17 +9,24 @@ export interface DefaultLayoutProps {
 
 export default function DefaultLayout (props: DefaultLayoutProps) {
     return <DL.Wrapper>
-        <DL.Header>header</DL.Header>
+        <DL.Header>
+            <Logo />
+        </DL.Header>
         <DL.Main>
             <DL.Navigation>
                 <NavBar />
             </DL.Navigation>
+
             <DL.FeaturedContent>
                 { props.children }
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim vero unde fugiat quaerat totam sint asperiores. Architecto nulla porro pariatur provident sit, sunt delectus hic nesciunt vitae? Quas, error numquam?</p>
             </DL.FeaturedContent>
+            
             <DL.Aside>
-                DIV 03
+                <SessionController 
+                    name={'Jonathas Lima'}
+                    description={'Programador a mais de 10 anos'}
+                    avatar={'https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg'}
+                />
             </DL.Aside>
         </DL.Main>
     </DL.Wrapper>

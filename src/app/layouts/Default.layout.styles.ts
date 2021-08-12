@@ -25,7 +25,12 @@ export const Main = styled.main`
     gap: 16px;
 `
 
-export const Navigation = styled.nav``
+export const Navigation = styled.nav`
+    display: flex;
+    justify-content: flex-end;
+
+    padding-right: 32px;
+`
 
 export const Aside = styled.aside``
 
