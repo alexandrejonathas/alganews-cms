@@ -60,7 +60,7 @@ export interface ChartProps {
 }
 
 export default function Chart ({ title, data }: ChartProps) {
-    return <C.Wrapper style={{ width: 640 }}>
+    return <C.Wrapper style={{ width: '100%' }}>
       <div style={{ marginBottom: 16}}>
         <Heading level={3}>
           {title}
