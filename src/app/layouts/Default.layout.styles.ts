@@ -39,4 +39,6 @@ export const FeaturedContent = styled.section`
     flex-direction: column;
     
     gap: 32px;
+
+    padding-bottom: 32px;
 `
