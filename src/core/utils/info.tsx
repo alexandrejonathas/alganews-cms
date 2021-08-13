@@ -10,12 +10,17 @@ export interface InfoProps {
 }
 
 export default function info (props: InfoProps) {
-    confirmAlert({
-        overlayClassName: 'info-overlay',
-        customUI: () => {
-            return (
-                <Info title={props.title} content={props.content} />
-            )
-        }
-    })
+    //Tranforma a função numa makroTask
+    //MikroTasks são executadas no fim do loop atual
+    //MakroTasks são executadas no início do proximo loop
+    setTimeout(() => {
+        confirmAlert({
+            overlayClassName: 'info-overlay',
+            customUI: () => {
+                return (
+                    <Info title={props.title} content={props.content} />
+                )
+            }
+        })
+    }, 0)
 }
