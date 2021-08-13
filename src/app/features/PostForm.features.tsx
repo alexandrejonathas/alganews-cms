@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Tag } from "react-tag-input";
 import styled from "styled-components";
 import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown";
+import info from "../../core/utils/info";
 import Button from "../components/Button/Button";
 import ImageUpload from "../components/ImageUpload";
 import Input from "../components/Input";
@@ -15,7 +16,12 @@ export default function PostFormFeatures () {
 
     const [body, setBody] = useState("")
 
-    return <PostFormWrapper>
+    function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        info({title: 'Atenção', content: 'Ação não implementada'})
+    }
+
+    return <PostFormWrapper onSubmit={ handleSubmitForm }>
         <Input label="Titulo" placeholder="Como fiquei rico aprendendo react" />
 
         <ImageUpload label="Thumbnail do post" />
@@ -48,7 +54,7 @@ const PostFormWrapper = styled.form`
     gap: 32px;
 `
 
-const PostFormSubmit = styled.form`
+const PostFormSubmit = styled.div`
     display: flex;
     justify-content: space-between;
 `

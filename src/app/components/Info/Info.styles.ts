@@ -1,3 +1,4 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
 
 export const InfoWrapper = styled.div`
@@ -11,6 +12,8 @@ export const InfoWrapper = styled.div`
     color: #274060;
 
     padding: 24px;
+
+    border: 1px solid ${ transparentize(0.9, '#274060')};
 `
 
 export const InfoIcon = styled.div`
