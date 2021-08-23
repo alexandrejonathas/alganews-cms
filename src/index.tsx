@@ -9,13 +9,15 @@ import NotFound from './app/views/NotFound.view';
 import GlobalStyle from './core/globalStyles'
 import EditorsListView from './app/views/EditorsList.view';
 import CreatePostView from './app/views/CreatePost.view';
+import EditorProfileView from './app/views/EditorProfile.view';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={ Home } />
-        <Route path="/editores" component={ EditorsListView } />
+        <Route path="/editores" component={ EditorsListView } exact />
+        <Route path="/editores/:id" component={ EditorProfileView } />
         <Route path="/posts/criar" component={ CreatePostView } />
         <Route component={ NotFound } />                
       </Switch>

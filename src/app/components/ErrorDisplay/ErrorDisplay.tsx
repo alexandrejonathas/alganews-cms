@@ -3,7 +3,7 @@ import Icon from '@mdi/react'
 import * as ED from './ErrorDisplay.styles'
 
 export interface ErrorDisplayProps {
-    small: boolean,
+    small?: boolean,
     title?: string,
     message?: string
 }
