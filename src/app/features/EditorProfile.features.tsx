@@ -9,6 +9,24 @@ interface EditorProfileFeaturesProps {
   hidePersonalData?: boolean
 }
 
+/*
+  Desnho de uma requisição
+  VERBO RESOURCE HTTP/1.1
+  Host: ?
+  Content-Type: ?
+  Content-Length: ?
+  
+  Body: ?
+
+  Ex:
+  POST /posts HTTP/1.1
+  Host: alganews.com.br
+  Content-Type: application/json
+  Content-Length: 44
+  
+  { "title": "olá, mundo", "body": "Lorem Ipsum" }
+*/
+
 export default function EditorProfileFeatures (props: EditorProfileFeaturesProps) {
 
     return <EditorProfileWrapper>
