@@ -1,7 +1,15 @@
+import { useEffect } from "react"
 import styled from "styled-components"
+import PostService from "../../sdk/services/Post.service"
 import Profile from "../components/Profile"
 
 export default function EditorsListFeatures () {
+
+    useEffect(() => {
+        const posts = PostService.getExistingPost(1)
+        console.log(posts)
+    }, [])
+
 
     return <EditorsListWrapper>
         <Profile
