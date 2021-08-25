@@ -3,6 +3,7 @@ import { Tag } from "react-tag-input";
 import styled from "styled-components";
 import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown";
 import info from "../../core/utils/info";
+import PostService from "../../sdk/services/Post.service";
 import Button from "../components/Button/Button";
 import ImageUpload from "../components/ImageUpload";
 import Input from "../components/Input";
@@ -12,17 +13,33 @@ import WordPriceCount from "../components/WordPriceCount";
 
 export default function PostFormFeatures () {
 
+    const [title, setTitle] = useState("")
     const [tags, setTags] = useState<Tag[]>([])
 
     const [body, setBody] = useState("")
 
-    function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        info({title: 'Atenção', content: 'Ação não implementada'})
+        
+        const newPost = await PostService.createPost({
+           title: title,
+           body: body,
+           imageUrl: '',
+           tags: tags.map(t => t.text) 
+        })
+        
+        info({
+            title: 'Post alvo com sucesso', 
+            content: `Você acabou de criar o post com id ${ newPost.id }`})
     }
 
     return <PostFormWrapper onSubmit={ handleSubmitForm }>
-        <Input label="Titulo" placeholder="Como fiquei rico aprendendo react" />
+        <Input 
+            label="Titulo"
+            value={title}
+            onChange={ e => setTitle(e.currentTarget.value) } 
+            placeholder="Como fiquei rico aprendendo react" 
+        />
 
         <ImageUpload label="Thumbnail do post" />
 
