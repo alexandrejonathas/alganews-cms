@@ -8,4 +8,10 @@ export default class MetricService extends Service {
             .get<Metric.EditorTagRatio>('/metrics/editor/top3-tags')
             .then(this.getData)
     }
+
+    static getEditorMonthlyEarnings () {
+        return this.Http
+            .get<Metric.EditorMonthlyEarnings>('/metrics/editor/monthly-earnings')
+            .then(this.getData)        
+    }
 }
