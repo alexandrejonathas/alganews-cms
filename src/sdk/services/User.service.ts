@@ -13,7 +13,13 @@ class UserService extends Service {
         return this.Http
             .get<User.EditorDetailed>(`/users/editors/${id}`)
             .then(this.getData)
-    } 
+    }
+    
+    static getDetailedUser (userId: number) {
+        return this.Http
+            .get<User.Detailed>(`/users/${userId}`)
+            .then(this.getData)
+    }
    
 
 }

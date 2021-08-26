@@ -1,17 +1,17 @@
-import { AlagaNews } from "./AlgaNews";
+import { AlgaNews } from "./AlgaNews";
 
 export namespace User {
     
-    export type Input = AlagaNews.components['schemas']['UserInput']
-    export type Detailed = AlagaNews.components['schemas']['UserDetailed']
-    export type Summary = AlagaNews.components['schemas']['UserSummary']
-    export type Minimal = AlagaNews.components['schemas']['UserMinimal']
-    export type Metrics = AlagaNews.components['schemas']['UserMetrics']
+    export type Input = AlgaNews.components['schemas']['UserInput']
+    export type Detailed = AlgaNews.components['schemas']['UserDetailed']
+    export type Summary = AlgaNews.components['schemas']['UserSummary']
+    export type Minimal = AlgaNews.components['schemas']['UserMinimal']
+    export type Metrics = AlgaNews.components['schemas']['UserMetrics']
 
-    export type Role = AlagaNews.components['schemas']['Role']
-    export type Skill = AlagaNews.components['schemas']['Skill']
+    export type Role = AlgaNews.components['schemas']['Role']
+    export type Skill = AlgaNews.components['schemas']['Skill']
 
-    export type EditorSummary = AlagaNews.components['schemas']['EditorSummary']
-    export type EditorDetailed = AlagaNews.components['schemas']['EditorDetailed']
+    export type EditorSummary = AlgaNews.components['schemas']['EditorSummary']
+    export type EditorDetailed = AlgaNews.components['schemas']['EditorDetailed']
 
 }

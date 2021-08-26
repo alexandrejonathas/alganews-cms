@@ -1,8 +1,8 @@
-import { AlagaNews } from "./AlgaNews";
+import { AlgaNews } from "./AlgaNews";
 
 export namespace File {
 
-    export type UploadRequestInput = AlagaNews.components['schemas']['UploadRequestInput']
-    export type UploadRequest = AlagaNews.components['schemas']['UploadRequest']
+    export type UploadRequestInput = AlgaNews.components['schemas']['UploadRequestInput']
+    export type UploadRequest = AlgaNews.components['schemas']['UploadRequest']
 
 }

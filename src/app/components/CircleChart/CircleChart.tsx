@@ -50,7 +50,7 @@ export default function CircleChart (props : CircleChartProps) {
                     </C.Circle>
             </C.Svg>
             <C.Percentage theme={props.theme}>
-                { props.progress }%
+                { Math.ceil(props.progress) }%
             </C.Percentage>
         </C.SvgWrapper>
         {
