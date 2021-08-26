@@ -10,6 +10,15 @@ class FileService extends Service {
             .then(res => res.uploadSignedUrl)
     }
 
+    //Implementação para o GCP
+    static uploadFileToSignedUrl (signedUrl: string, file: File) {
+        return this.Http
+            .put(signedUrl, file, {
+                headers: { 'Content-Type': file.type }
+            })
+            .then(this.getData)
+    }
+
 }
 
 
