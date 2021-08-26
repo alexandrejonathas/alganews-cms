@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { User } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service"
 import UserService from "../../sdk/services/User.service"
+import getEditorDescription from "../../sdk/utils/getEditorDescription"
 import Profile from "../components/Profile"
 
 export default function EditorsListFeatures () {
@@ -13,7 +14,6 @@ export default function EditorsListFeatures () {
     useEffect(() => {
         UserService.getAllEditors()
             .then(editors => setEditors(editors))
-            console.log(editors)
     }, [])
 
     return <EditorsListWrapper>
@@ -22,7 +22,7 @@ export default function EditorsListFeatures () {
                 return <Profile
                             editorId={editor.id}
                             name={editor.name}
-                            description={'editor a X meses'}
+                            description={getEditorDescription(new Date(editor.createdAt))}
                             avatar={editor.avatarUrls.small}
                         />
             })
