@@ -4,6 +4,12 @@ import styled from "styled-components"
 import ProgressBar from "../components/ProgressBar/ProgressBar"
 import FieldDescription from "../components/FieldDescriptor/FieldDescriptor"
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor"
+import { useEffect } from "react"
+import { useState } from "react"
+import { User } from "../../sdk/@types"
+import UserService from "../../sdk/services/User.service"
+import getEditorDescription from "../../sdk/utils/getEditorDescription"
+import { useParams } from "react-router-dom"
 
 interface EditorProfileFeaturesProps {
   hidePersonalData?: boolean
@@ -29,11 +35,25 @@ interface EditorProfileFeaturesProps {
 
 export default function EditorProfileFeatures (props: EditorProfileFeaturesProps) {
 
+    const [editor, setEditor] = useState<User.EditorDetailed>()
+
+    const { id } = useParams<{ id: string }>()
+    
+    useEffect(() => {
+      UserService
+        .getExistingEditor(Number(id))
+        .then(editor => setEditor(editor))
+
+    }, [id])
+    
+    if(!editor)
+      return null
+
     return <EditorProfileWrapper>
         <EditorHeadline>
-            <Avatar src="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg" alt="" />
-            <Name>Jonathas Lima</Name>
-            <Description>Editor de conteúdo há 3 anos</Description>            
+            <Avatar src={editor.avatarUrls.medium} alt={editor.name} />
+            <Name>{ editor.name }</Name>
+            <Description>{ getEditorDescription(new Date(editor.createdAt!)) }</Description>            
         </EditorHeadline>
 
         <Divisor />
@@ -41,19 +61,19 @@ export default function EditorProfileFeatures (props: EditorProfileFeaturesProps
         <EditorFeatures>
             
             <PersonalInfo>
-                <Biography>
-                Ana Castillo é especialista em recrutamento de desenvolvedores e ama escrever dicas para ajudar os devs a encontrarem a vaga certa para elas. Atualmente tem uma empresa de Recruitment e é redatora no alga content
-                </Biography>
+                <Biography>{editor.bio}</Biography>
                 <Skills>
-                    <ProgressBar theme="primary" title="tech recruiting" progress={95} />
-                    <ProgressBar theme="primary" title="react" progress={80} />
-                    <ProgressBar theme="primary" title="node" progress={60} />
+                    {
+                      editor.skills?.map(skill => {
+                        return <ProgressBar theme="primary" title={skill.name} progress={skill.percentage} />
+                      })
+                    }
                 </Skills>
             </PersonalInfo>
 
             <ContactInfo>               
-                <FieldDescription description="Cidade" value="Vila Velha" />
-                <FieldDescription description="Estado" value="Espirito Santo" />
+                <FieldDescription description="Cidade" value={editor.location.city} />
+                <FieldDescription description="Estado" value={editor.location.state} />
                 {
                   !props.hidePersonalData && 
                   <>
