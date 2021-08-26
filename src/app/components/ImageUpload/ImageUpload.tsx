@@ -7,7 +7,7 @@ import * as IU from './ImageUpload.styles'
 
 export interface ImageUploadProps {
     label: string,
-
+    onImageUpload: (imageUrl: string) => any
 }
 
 export default function ImageUpload (props: ImageUploadProps) {
@@ -27,6 +27,8 @@ export default function ImageUpload (props: ImageUploadProps) {
                 const imageUrl = await FileService.upload(file)
 
                 console.log(imageUrl)
+
+                props.onImageUpload(imageUrl)
             })
 
             reader.readAsDataURL(file)

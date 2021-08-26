@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Tag } from "react-tag-input";
 import styled from "styled-components";
@@ -17,6 +18,11 @@ export default function PostFormFeatures () {
     const [tags, setTags] = useState<Tag[]>([])
 
     const [body, setBody] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
+
+    useEffect(() => {
+        console.log('imageUrl: ', imageUrl)
+    }, [imageUrl])
 
     async function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -24,12 +30,12 @@ export default function PostFormFeatures () {
         const newPost = await PostService.createPost({
            title: title,
            body: body,
-           imageUrl: '',
+           imageUrl: imageUrl,
            tags: tags.map(t => t.text) 
         })
         
         info({
-            title: 'Post alvo com sucesso', 
+            title: 'Post salvo com sucesso', 
             content: `Você acabou de criar o post com id ${ newPost.id }`})
     }
 
@@ -41,7 +47,7 @@ export default function PostFormFeatures () {
             placeholder="Como fiquei rico aprendendo react" 
         />
 
-        <ImageUpload label="Thumbnail do post" />
+        <ImageUpload label="Thumbnail do post" onImageUpload={ url => setImageUrl(url)} />
 
         <MarkdownEditor 
             onChange={setBody}

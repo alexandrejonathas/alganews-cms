@@ -1,51 +1,32 @@
+import { useState } from "react"
 import { useEffect } from "react"
 import styled from "styled-components"
+import { User } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service"
+import UserService from "../../sdk/services/User.service"
 import Profile from "../components/Profile"
 
 export default function EditorsListFeatures () {
 
+    const [editors, setEditors] = useState<User.EditorSummary[]>([])
+
     useEffect(() => {
-        const posts = PostService.getExistingPost(1)
-        console.log(posts)
+        UserService.getAllEditors()
+            .then(editors => setEditors(editors))
+            console.log(editors)
     }, [])
 
-
     return <EditorsListWrapper>
-        <Profile
-            editorId={1}
-            name="Jonathas Lima"
-            description="Editor de conteúdo há 3 anos"
-            avatar="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg"
-        />
-
-        <Profile
-            editorId={2}
-            name="Jonathas Lima"
-            description="Editor de conteúdo há 3 anos"
-            avatar="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg"
-        />
-
-        <Profile
-            editorId={3}
-            name="Jonathas Lima"
-            description="Editor de conteúdo há 3 anos"
-            avatar="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg"
-        />
-
-        <Profile
-            editorId={4}
-            name="Jonathas Lima"
-            description="Editor de conteúdo há 3 anos"
-            avatar="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg"
-        />
-
-        <Profile
-            editorId={5}
-            name="Jonathas Lima"
-            description="Editor de conteúdo há 3 anos"
-            avatar="https://static.vecteezy.com/ti/vetor-gratis/p1/2275847-avatar-masculino-perfil-icone-de-homem-caucasiano-sorridente-vetor.jpg"
-        />                                
+        {
+            editors.map(editor => {
+                return <Profile
+                            editorId={editor.id}
+                            name={editor.name}
+                            description={'editor a X meses'}
+                            avatar={editor.avatarUrls.small}
+                        />
+            })
+        }                              
     </EditorsListWrapper>
 }
 
