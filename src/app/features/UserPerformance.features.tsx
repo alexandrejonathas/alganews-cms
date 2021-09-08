@@ -1,11 +1,11 @@
-import { transparentize } from "polished";
 import { useEffect } from "react";
 import { useState } from "react";
+import withBoundary from "../../core/hoc/withBoundary";
 import transformEditorMontlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs";
 import MetricService from "../../sdk/services/Metric.service";
 import Chart, { ChartProps } from "../components/Chart/Chart";
 
-export default function UserPermormanceFeatures () {
+function UserPermormanceFeatures () {
 
     const [editorEarnings, setEditorEarnings] = useState<ChartProps['data']>()
 
@@ -47,3 +47,5 @@ export default function UserPermormanceFeatures () {
         data={editorEarnings} 
     />
 }
+
+export default withBoundary(UserPermormanceFeatures, 'performance do usuário')

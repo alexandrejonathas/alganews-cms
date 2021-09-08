@@ -23,13 +23,9 @@ export default function Home () {
             </ErrorBoundary>
         </div>
 
-        <ErrorBoundary component="user performance">
-            <UserPerformanceFeatures />
-        </ErrorBoundary>    
+        <UserPerformanceFeatures />
         
-        <ErrorBoundary component="lista de posts">
-            <PostListFeatures />
-        </ErrorBoundary>
+        <PostListFeatures />
 
     </DefaultLayout>
 }
