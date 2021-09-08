@@ -8,20 +8,6 @@ import PostService from "../../sdk/services/Post.service"
 
 import Table from '../components/Table'
 
-type IPost = {
-  id: number
-  title: string
-  views: number
-  author: {
-    name: string
-    avatar: string
-  }
-  conversions: {
-    thousands: number
-    percentage: number
-  }
-}
-
 export default function PostListFeatures () {
 
     const [posts, setPosts] = useState<Post.Paginated>()
