@@ -12,6 +12,8 @@ export default function PostListFeatures () {
 
     const [posts, setPosts] = useState<Post.Paginated>()
     
+    const [error, setError] = useState<Error>()
+
     useEffect(() => {
       PostService.getAllPosts({
         page: 0,
@@ -20,6 +22,7 @@ export default function PostListFeatures () {
         sort: ['createdAt', 'desc']
       })
       .then(setPosts)
+      .catch(e => setError(new Error(e.message)))
     }, [])
     
     const columns = useMemo<Column<Post.Summary>[]>(() => [
@@ -71,5 +74,8 @@ export default function PostListFeatures () {
       data: posts?.content || [], columns
     })
     
+    if(error)
+      throw error
+
     return <Table<Post.Summary> instance={instance} />    
 }

@@ -1,4 +1,5 @@
 import usePageTitle from "../../core/hooks/usePageTitle"
+import ErrorBoundary from "../components/ErrorBoundary"
 import PostListFeatures from "../features/PostList.features"
 import { UserEarningsFeatures } from "../features/UserEarnings.features"
 import UserPerformanceFeatures from "../features/UserPerformance.features"
@@ -12,13 +13,23 @@ export default function Home () {
             display: 'grid', 
             gridTemplateColumns: 'repeat(2, 1fr)', 
             alignItems: 'center', gap: '32px'}}>
-            <UserTopTagsFeatures />
-            <UserEarningsFeatures />
+            
+            <ErrorBoundary>
+                <UserTopTagsFeatures />
+            </ErrorBoundary>
+
+            <ErrorBoundary>
+                <UserEarningsFeatures />
+            </ErrorBoundary>
         </div>
 
-        <UserPerformanceFeatures />
-
-        <PostListFeatures />
+        <ErrorBoundary component="user performance">
+            <UserPerformanceFeatures />
+        </ErrorBoundary>    
+        
+        <ErrorBoundary component="lista de posts">
+            <PostListFeatures />
+        </ErrorBoundary>
 
     </DefaultLayout>
 }

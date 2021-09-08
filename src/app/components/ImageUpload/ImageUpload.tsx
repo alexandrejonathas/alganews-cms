@@ -1,7 +1,6 @@
 import { mdiDelete, mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
 import { ChangeEvent, useState } from 'react'
-import { uuid } from 'uuidv4'
 import FileService from '../../../sdk/services/File.service'
 import * as IU from './ImageUpload.styles'
 

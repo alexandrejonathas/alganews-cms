@@ -9,11 +9,17 @@ export default function UserPermormanceFeatures () {
 
     const [editorEarnings, setEditorEarnings] = useState<ChartProps['data']>()
 
+    const [error, setError] = useState<Error>()
+
     useEffect(() => {
       MetricService.getEditorMonthlyEarnings()
         .then(transformEditorMontlyEarningsIntoChartJs)
         .then(setEditorEarnings)
+        .catch(e => setError(new Error(e.message)))
     }, [])
+
+    if(error)
+      throw error
 
     if(!editorEarnings)
       return null

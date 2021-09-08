@@ -9,15 +9,22 @@ export default function UserTopTagsFeatures () {
 
     const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([])
 
+    const [error, setError] = useState<Error>()
+
     useEffect(() => {
         MetricService.getTop3Tags()
             .then(setTopTags)
+            .catch(e => setError(new Error(e.message)))
     }, [])
+
+    if(error)
+        throw error
 
     return <UserTopTagsWrapper>
         {
             topTags.map((tag, index) => {
-                return <CircleChart 
+                return <CircleChart
+                    key={index} 
                     theme={index == 0 ? 'primary' : 'default'} 
                     size={88} 
                     caption={tag.tagName}     

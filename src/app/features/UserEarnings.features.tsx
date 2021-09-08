@@ -9,9 +9,12 @@ export function UserEarningsFeatures () {
 
     const [user, setUser] = useState<User.Detailed>()
 
+    const [error, setError] = useState<Error>()
+
     useEffect(() => {
         UserService.getDetailedUser(7)
             .then(setUser)
+            .catch(e => setError(new Error(e.message)))
     }, [])
 
     if(!user)
