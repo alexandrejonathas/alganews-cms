@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import { Metric } from "../../sdk/@types";
 import MetricService from "../../sdk/services/Metric.service";
@@ -19,6 +20,13 @@ export default function UserTopTagsFeatures () {
 
     if(error)
         throw error
+
+    if(!topTags.length)
+        return <UserTopTagsWrapper>
+            <Skeleton circle={true} height={88} width={88} />
+            <Skeleton circle={true} height={88} width={88} />
+            <Skeleton circle={true} height={88} width={88} />
+        </UserTopTagsWrapper>
 
     return <UserTopTagsWrapper>
         {

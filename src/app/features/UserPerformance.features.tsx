@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import withBoundary from "../../core/hoc/withBoundary";
 import transformEditorMontlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs";
 import MetricService from "../../sdk/services/Metric.service";
@@ -22,7 +23,9 @@ function UserPermormanceFeatures () {
       throw error
 
     if(!editorEarnings)
-      return null
+      return <div>
+        <Skeleton height={'227px'} />
+      </div>
     
     const data = {
       labels: ['1', '2', '3', '4', '5', '6'],

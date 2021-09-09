@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import styled from "styled-components"
 import { User } from "../../sdk/@types"
 import UserService from "../../sdk/services/User.service"
@@ -18,7 +19,12 @@ export function UserEarningsFeatures () {
     }, [])
 
     if(!user)
-        return null
+        return <UserEaningsFeaturesWrapper style={{ height: '123px' }}>
+            <Skeleton width={150} height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+        </UserEaningsFeaturesWrapper>
 
     return <UserEaningsFeaturesWrapper>
 

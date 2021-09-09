@@ -2,6 +2,7 @@ import { mdiOpenInNew } from "@mdi/js"
 import Icon from "@mdi/react"
 import { format } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import { Column, useTable } from "react-table"
 import withBoundary from "../../core/hoc/withBoundary"
 import { Post } from "../../sdk/@types"
@@ -77,6 +78,18 @@ function PostListFeatures () {
     
     if(error)
       throw error
+
+    if(!posts)
+      return <div>
+        <Skeleton height={32} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+        <Skeleton height={40} />
+      </div>
 
     return <Table<Post.Summary> instance={instance} />    
 }

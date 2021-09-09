@@ -1,5 +1,6 @@
 import usePageTitle from "../../core/hooks/usePageTitle"
 import ErrorBoundary from "../components/ErrorBoundary"
+import Loading from "../components/Loading"
 import PostListFeatures from "../features/PostList.features"
 import { UserEarningsFeatures } from "../features/UserEarnings.features"
 import UserPerformanceFeatures from "../features/UserPerformance.features"
@@ -14,6 +15,8 @@ export default function Home () {
             gridTemplateColumns: 'repeat(2, 1fr)', 
             alignItems: 'center', gap: '32px'}}>
             
+            <Loading />
+
             <ErrorBoundary>
                 <UserTopTagsFeatures />
             </ErrorBoundary>
