@@ -16,6 +16,21 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
 
+    //https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
+    backdrop-filter: blur(5px);   
+
+    //https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+    animation: .25s pop ease;
+    @keyframes pop {
+        from {
+        background-color: rgba(0,0,0,.0);
+        opacity: 0;
+        } to {
+        background-color: rgba(0,0,0,.7);
+        opacity: 1;
+        }
+    }
+
     .lds-ring {
         display: inline-block;
         position: relative;

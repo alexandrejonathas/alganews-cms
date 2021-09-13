@@ -8,6 +8,7 @@ import PostService from "../../sdk/services/Post.service";
 import Button from "../components/Button/Button";
 import ImageUpload from "../components/ImageUpload";
 import Input from "../components/Input";
+import Loading from "../components/Loading";
 import MarkdownEditor from "../components/MarkdownEditor";
 import TagInput from "../components/TagInput";
 import WordPriceCount from "../components/WordPriceCount";
@@ -20,6 +21,8 @@ export default function PostFormFeatures () {
     const [body, setBody] = useState("")
     const [imageUrl, setImageUrl] = useState("")
 
+    const [publishing, setPublishing] = useState<boolean>(false)
+
     useEffect(() => {
         console.log('imageUrl: ', imageUrl)
     }, [imageUrl])
@@ -27,19 +30,30 @@ export default function PostFormFeatures () {
     async function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         
-        const newPost = await PostService.createPost({
-           title: title,
-           body: body,
-           imageUrl: imageUrl,
-           tags: tags.map(t => t.text) 
-        })
-        
-        info({
-            title: 'Post salvo com sucesso', 
-            content: `Você acabou de criar o post com id ${ newPost.id }`})
+        try{
+            setPublishing(true)
+    
+            const newPost = await PostService.createPost({
+               title: title,
+               body: body,
+               imageUrl: imageUrl,
+               tags: tags.map(t => t.text) 
+            })
+            
+            info({
+                title: 'Post salvo com sucesso', 
+                content: `Você acabou de criar o post com id ${ newPost.id }`
+            })
+        }finally {
+            setPublishing(false)
+        }
+
     }
 
     return <PostFormWrapper onSubmit={ handleSubmitForm }>
+        
+        <Loading show={publishing} />
+
         <Input 
             label="Titulo"
             value={title}
