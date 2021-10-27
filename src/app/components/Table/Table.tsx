@@ -1,6 +1,6 @@
-import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight } from '@mdi/js'
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js'
 import Icon from '@mdi/react'
-import { size, transparentize } from 'polished'
+import { transparentize } from 'polished'
 import { useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import { TableInstance } from 'react-table'

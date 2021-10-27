@@ -5,11 +5,13 @@ import { useEffect, useMemo, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import { Column, usePagination, useTable } from "react-table"
 import withBoundary from "../../core/hoc/withBoundary"
+import modal from "../../core/utils/modal"
 import { Post } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service"
 import Loading from "../components/Loading"
 
 import Table from '../components/Table'
+import PostPreview from "./PostPreview"
 
 function PostListFeatures () {
 
@@ -47,7 +49,15 @@ function PostListFeatures () {
             width: 320,
             Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '8px' }} >
               <img width="24px" height="24px" src={props.row.original.editor.avatarUrls.small} alt={props.row.original.editor.name} />
-              {props.value}
+              <a 
+                href={`/posts/${props.row.original.id}`}
+                onClick={e => {
+                  e.preventDefault()
+                  modal({children: <PostPreview postId={props.row.original.id} />})
+                }}
+              >
+                {props.value}
+              </a>
             </div>
             
         },
