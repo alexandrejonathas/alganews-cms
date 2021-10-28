@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import { Tag } from "react-tag-input";
 import styled from "styled-components";
 import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown";
@@ -13,7 +14,11 @@ import MarkdownEditor from "../components/MarkdownEditor";
 import TagInput from "../components/TagInput";
 import WordPriceCount from "../components/WordPriceCount";
 
-export default function PostFormFeatures () {
+interface PostFormProps {
+    postId?: number
+}
+
+export default function PostFormFeatures ({ postId }: PostFormProps) {
 
     const [title, setTitle] = useState("")
     const [tags, setTags] = useState<Tag[]>([])
@@ -23,32 +28,69 @@ export default function PostFormFeatures () {
 
     const [publishing, setPublishing] = useState<boolean>(false)
 
+    const [loading, setLoading] = useState(false)
+
+    const history = useHistory()
+
     useEffect(() => {
-        console.log('imageUrl: ', imageUrl)
-    }, [imageUrl])
+        if(postId){
+            setLoading(true)
+            PostService.getExistingPost(postId)
+                .then(post => {
+                    setTitle(post.title)
+                    setBody(post.body)
+                    setImageUrl(post.imageUrls.default)
+                    setTags(post.tags.map(tag => ({id: tag, text: tag})))
+                }).finally(() => setLoading(false))
+        } 
+    }, [postId])
+
+    async function createPost () {
+        const newPost = await PostService.createPost({
+            title: title,
+            body: body,
+            imageUrl: imageUrl,
+            tags: tags.map(t => t.text) 
+         })
+         
+         info({
+             title: 'Post salvo com sucesso', 
+             content: `Você acabou de criar o post com id ${ newPost.id }`
+         })        
+    }
+
+    async function updatePost (postId: number) {
+        await PostService.updatePost(postId, {
+            title: title,
+            body: body,
+            imageUrl: imageUrl,
+            tags: tags.map(t => t.text) 
+         })
+         
+         info({
+             title: 'Post atualiado com sucesso', 
+             content: `Você acabou de atualizar o post com id ${ postId }`
+         })        
+    }    
 
     async function handleSubmitForm (e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        
         try{
+            e.preventDefault()
+
             setPublishing(true)
-    
-            const newPost = await PostService.createPost({
-               title: title,
-               body: body,
-               imageUrl: imageUrl,
-               tags: tags.map(t => t.text) 
-            })
             
-            info({
-                title: 'Post salvo com sucesso', 
-                content: `Você acabou de criar o post com id ${ newPost.id }`
-            })
+            postId ? await updatePost(postId) : await createPost()
+
+            history.push('/')
+            
         }finally {
             setPublishing(false)
         }
 
     }
+
+    if(loading)
+        return <Loading show={loading} />
 
     return <PostFormWrapper onSubmit={ handleSubmitForm }>
         
@@ -61,9 +103,14 @@ export default function PostFormFeatures () {
             placeholder="Como fiquei rico aprendendo react" 
         />
 
-        <ImageUpload label="Thumbnail do post" onImageUpload={ url => setImageUrl(url)} />
+        <ImageUpload 
+            label="Thumbnail do post" 
+            onImageUpload={ url => setImageUrl(url)}
+            preview={imageUrl} 
+        />
 
-        <MarkdownEditor 
+        <MarkdownEditor
+            value={body} 
             onChange={setBody}
         />
 
@@ -78,7 +125,11 @@ export default function PostFormFeatures () {
                 pricePerWord={0.25} 
                 wordsCount={countWordsInMarkdown(body)} 
             />
-            <Button variant="primary" label="Salvar post" />
+            <Button 
+                variant="primary" 
+                label="Salvar post"
+                disabled={ !title || !imageUrl || !body || !tags.length }
+            />
         </PostFormSubmit>
 
     </PostFormWrapper>

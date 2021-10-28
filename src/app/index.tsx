@@ -9,6 +9,7 @@ import CreatePostView from './views/CreatePost.view';
 import EditorProfileView from './views/EditorProfile.view';
 import { useEffect } from 'react';
 import info from '../core/utils/info';
+import EditPostView from './views/EditPost.view';
 
 export default function App () {
 
@@ -27,6 +28,7 @@ export default function App () {
         <Route path="/editores" component={ EditorsListView } exact />
         <Route path="/editores/:id" component={ EditorProfileView } />
         <Route path="/posts/criar" component={ CreatePostView } />
+        <Route path="/posts/:id/editar" component={ EditPostView } />
         <Route component={ NotFound } />                
         </Switch>
     </BrowserRouter>

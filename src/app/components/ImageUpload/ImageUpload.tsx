@@ -1,18 +1,19 @@
 import { mdiDelete, mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import FileService from '../../../sdk/services/File.service'
 import Loading from '../Loading'
 import * as IU from './ImageUpload.styles'
 
 export interface ImageUploadProps {
     label: string,
-    onImageUpload: (imageUrl: string) => any
+    onImageUpload: (imageUrl: string) => any,
+    preview?: string
 }
 
 export default function ImageUpload (props: ImageUploadProps) {
 
-    const [filePreview, setFilePreview] = useState<string | null>(null)
+    const [filePreview, setFilePreview] = useState<string | undefined>(undefined)
 
     const [publishing, setPublishing] = useState(false)
 
@@ -37,11 +38,15 @@ export default function ImageUpload (props: ImageUploadProps) {
         }
     }
 
+    useEffect(() => {
+        setFilePreview(props.preview)
+    }, [props.preview])
+
     if(filePreview){        
         return <IU.ImagePreviewWrapper >
             <Loading show={publishing} />
             <IU.ImagePreview preview={filePreview} >
-                <IU.Button onClick={ () => setFilePreview(null) } >
+                <IU.Button onClick={ () => setFilePreview(undefined) } >
                     Remover imagem
                     <Icon size={'24px'} path={mdiDelete} />    
                 </IU.Button>

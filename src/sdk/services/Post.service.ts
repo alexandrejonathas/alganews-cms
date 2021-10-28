@@ -16,7 +16,7 @@ class PostService extends Service {
 
     static getExistingPost (id: number) {
         return this.Http
-            .get<Post.Paginated>(`/posts/${id}`)
+            .get<Post.Detailed>(`/posts/${id}`)
             .then(this.getData)
     }
     
@@ -24,7 +24,25 @@ class PostService extends Service {
         return this.Http
             .post<Post.Detailed>(`/posts`, post)
             .then(this.getData)
-    }      
+    }
+    
+    static publish(postId: number) {
+        return this.Http
+            .put<{}>(`/posts/${postId}/publishing`)
+            .then(this.getData)
+    }
+
+    static unpublish(postId: number) {
+        return this.Http
+            .delete<{}>(`/posts/${postId}/publishing`)
+            .then(this.getData)
+    }
+    
+    static updatePost (postId: number, post: Post.Input) {
+        return this.Http
+            .put<Post.Detailed>(`/posts/${postId}`, post)
+            .then(this.getData)
+    }    
 
 }
 

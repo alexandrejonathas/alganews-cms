@@ -1,4 +1,3 @@
-import Input from "../components/Input";
 import PostFormFeatures from "../features/PostForm.features";
 import DefaultLayout from "../layouts";
 

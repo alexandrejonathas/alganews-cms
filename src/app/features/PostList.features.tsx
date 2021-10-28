@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { mdiOpenInNew } from "@mdi/js"
 import Icon from "@mdi/react"
 import { format } from "date-fns"
@@ -47,9 +48,16 @@ function PostListFeatures () {
             Header: () => <div style={{ textAlign: 'left' }}>Artigo</div>,
             accessor: 'title',
             width: 320,
-            Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '8px' }} >
+            Cell: (props) => <div style={{ 
+                textAlign: 'left', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                maxWidth: 270
+              }} >
               <img width="24px" height="24px" src={props.row.original.editor.avatarUrls.small} alt={props.row.original.editor.name} />
-              <a 
+              <PostTitleAnchor
+                title={props.value} 
                 href={`/posts/${props.row.original.id}`}
                 onClick={e => {
                   e.preventDefault()
@@ -57,7 +65,7 @@ function PostListFeatures () {
                 }}
               >
                 {props.value}
-              </a>
+              </PostTitleAnchor>
             </div>
             
         },
@@ -123,5 +131,19 @@ function PostListFeatures () {
       />
     </>    
 }
+
+const PostTitleAnchor = styled.a`
+  font-size: 14ox;
+  text-decoration: none;
+  color: #274060;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    color: #09F;
+    text-decoration: underline;
+  }
+`
 
 export default withBoundary(PostListFeatures, 'lista de posts')
