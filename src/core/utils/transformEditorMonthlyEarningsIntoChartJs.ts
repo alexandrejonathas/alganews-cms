@@ -1,8 +1,8 @@
+import { Metric } from "alexandrejonathas-alganews-sdk";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { transparentize } from "polished";
 import { ChartProps } from "../../app/components/Chart/Chart";
-import { Metric } from "../../sdk/@types";
 
 function transformEditorMontlyEarningsIntoChartJs ( 
     editorEarnings: Metric.EditorMonthlyEarnings ): ChartProps['data'] {

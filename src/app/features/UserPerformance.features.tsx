@@ -1,9 +1,9 @@
+import { MetricService } from "alexandrejonathas-alganews-sdk";
 import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import withBoundary from "../../core/hoc/withBoundary";
 import transformEditorMontlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs";
-import MetricService from "../../sdk/services/Metric.service";
 import Chart, { ChartProps } from "../components/Chart/Chart";
 
 function UserPermormanceFeatures () {

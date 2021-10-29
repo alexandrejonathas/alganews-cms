@@ -6,9 +6,7 @@ import FieldDescription from "../components/FieldDescriptor/FieldDescriptor"
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor"
 import { useEffect } from "react"
 import { useState } from "react"
-import { User } from "../../sdk/@types"
-import UserService from "../../sdk/services/User.service"
-import getEditorDescription from "../../sdk/utils/getEditorDescription"
+import { UserService, getEditorDescription, User } from "alexandrejonathas-alganews-sdk"
 import { useParams } from "react-router-dom"
 
 interface EditorProfileFeaturesProps {

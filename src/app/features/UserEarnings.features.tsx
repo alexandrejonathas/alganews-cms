@@ -1,9 +1,8 @@
+import { User, UserService } from "alexandrejonathas-alganews-sdk"
 import { useEffect } from "react"
 import { useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import styled from "styled-components"
-import { User } from "../../sdk/@types"
-import UserService from "../../sdk/services/User.service"
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor"
 
 export function UserEarningsFeatures () {

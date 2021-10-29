@@ -1,9 +1,8 @@
+import { Metric, MetricService } from "alexandrejonathas-alganews-sdk";
 import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
-import { Metric } from "../../sdk/@types";
-import MetricService from "../../sdk/services/Metric.service";
 import CircleChart from "../components/CircleChart";
 
 export default function UserTopTagsFeatures () {

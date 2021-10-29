@@ -7,12 +7,11 @@ import Skeleton from "react-loading-skeleton"
 import { Column, usePagination, useTable } from "react-table"
 import withBoundary from "../../core/hoc/withBoundary"
 import modal from "../../core/utils/modal"
-import { Post } from "../../sdk/@types"
-import PostService from "../../sdk/services/Post.service"
 import Loading from "../components/Loading"
 
 import Table from '../components/Table'
 import PostPreview from "./PostPreview"
+import { Post, PostService } from 'alexandrejonathas-alganews-sdk'
 
 function PostListFeatures () {
 
