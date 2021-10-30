@@ -11,30 +11,22 @@ import Loading from "../components/Loading"
 
 import Table from '../components/Table'
 import PostPreview from "./PostPreview"
-import { Post, PostService } from 'alexandrejonathas-alganews-sdk'
+import { Post } from 'alexandrejonathas-alganews-sdk'
+import usePosts from '../../core/hooks/usePosts'
 
 function PostListFeatures () {
 
-    const [posts, setPosts] = useState<Post.Paginated>()
-    
-    const [error, setError] = useState<Error>()
-
+    const { paginatedPosts, loading, fetchPosts } = usePosts()
     const [page, setPage] = useState(0)
 
-    const [loading, setLoading] = useState(false)
-
     useEffect(() => {
-      setLoading(true)
-      PostService.getAllPosts({
-        page: page,
-        size: 7,
-        showAll: true,
-        sort: ['createdAt', 'desc']
-      })
-      .then(setPosts)
-      .catch(e => setError(new Error(e.message)))
-      .finally(() => setLoading(false))
-    }, [page])
+        fetchPosts({
+          page: page,
+          size: 3,
+          showAll: true,
+          sort: ['createdAt', 'desc']
+        })
+    }, [fetchPosts, page])
     
     const columns = useMemo<Column<Post.Summary>[]>(() => [
         {
@@ -98,19 +90,16 @@ function PostListFeatures () {
     
     const instance = useTable<Post.Summary>(
       {
-        data: posts?.content || [], 
+        data: paginatedPosts?.content || [], 
         columns,
         manualPagination: true,
         initialState: { pageIndex: 0 },
-        pageCount: posts?.totalPages
+        pageCount: paginatedPosts?.totalPages
       }, 
       usePagination
     )
     
-    if(error)
-      throw error
-
-    if(!posts)
+    if(!paginatedPosts)
       return <div>
         <Skeleton height={32} />
         <Skeleton height={40} />

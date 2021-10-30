@@ -45,7 +45,7 @@ export const PostReducer = createReducer(initialState, (builder) => {
     })
     .addMatcher(fulfiledActions, (state) => {
       state.fetching = false
-    }).addMatcher(rejectedActions, (state) => {
+    }).addMatcher(rejectedActions, (state, action) => {
       state.fetching = false
     })
   

@@ -1,10 +1,8 @@
-import { getEditorDescription, User, UserService } from "alexandrejonathas-alganews-sdk"
-import { useState } from "react"
+import { getEditorDescription } from "alexandrejonathas-alganews-sdk"
 import { useEffect } from "react"
 import Skeleton from "react-loading-skeleton"
 import styled from "styled-components"
 import useEditors from "../../core/hooks/useEditors"
-import Loading from "../components/Loading"
 import Profile from "../components/Profile"
 
 export default function EditorsListFeatures () {

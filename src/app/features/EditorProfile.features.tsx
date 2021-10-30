@@ -5,9 +5,9 @@ import ProgressBar from "../components/ProgressBar/ProgressBar"
 import FieldDescription from "../components/FieldDescriptor/FieldDescriptor"
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor"
 import { useEffect } from "react"
-import { useState } from "react"
-import { UserService, getEditorDescription, User } from "alexandrejonathas-alganews-sdk"
+import { getEditorDescription } from "alexandrejonathas-alganews-sdk"
 import { useParams } from "react-router-dom"
+import useSingleEditor from "../../core/hooks/useSingleEditor"
 
 interface EditorProfileFeaturesProps {
   hidePersonalData?: boolean
@@ -33,16 +33,13 @@ interface EditorProfileFeaturesProps {
 
 export default function EditorProfileFeatures (props: EditorProfileFeaturesProps) {
 
-    const [editor, setEditor] = useState<User.EditorDetailed>()
-
     const { id } = useParams<{ id: string }>()
-    
-    useEffect(() => {
-      UserService
-        .getExistingEditor(Number(id))
-        .then(editor => setEditor(editor))
 
-    }, [id])
+    const { editor, fetchEditor } = useSingleEditor()
+
+    useEffect(() => {
+      fetchEditor(Number(id))
+    }, [id, fetchEditor])
     
     if(!editor)
       return null
@@ -63,7 +60,7 @@ export default function EditorProfileFeatures (props: EditorProfileFeaturesProps
                 <Skills>
                     {
                       editor.skills?.map(skill => {
-                        return <ProgressBar theme="primary" title={skill.name} progress={skill.percentage} />
+                        return <ProgressBar key={skill.name} theme="primary" title={skill.name} progress={skill.percentage} />
                       })
                     }
                 </Skills>
