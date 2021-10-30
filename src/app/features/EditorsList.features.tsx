@@ -3,18 +3,19 @@ import { useState } from "react"
 import { useEffect } from "react"
 import Skeleton from "react-loading-skeleton"
 import styled from "styled-components"
+import useEditors from "../../core/hooks/useEditors"
+import Loading from "../components/Loading"
 import Profile from "../components/Profile"
 
 export default function EditorsListFeatures () {
 
-    const [editors, setEditors] = useState<User.EditorSummary[]>([])
+    const { loading, editorsList, fetchAllEditors } = useEditors()
 
     useEffect(() => {
-        UserService.getAllEditors()
-            .then(editors => setEditors(editors))
-    }, [])
+        fetchAllEditors()
+    }, [fetchAllEditors])
 
-    if(!editors.length)
+    if(!editorsList.length)
         return <EditorsListWrapper>
             <Skeleton width={328} height={82} />
             <Skeleton width={328} height={82} />
@@ -26,7 +27,7 @@ export default function EditorsListFeatures () {
 
     return <EditorsListWrapper>
         {
-            editors.map(editor => {
+            editorsList.map(editor => {
                 return <Profile
                             editorId={editor.id}
                             name={editor.name}
