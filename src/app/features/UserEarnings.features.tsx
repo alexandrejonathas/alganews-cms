@@ -1,21 +1,21 @@
-import { User, UserService } from "alexandrejonathas-alganews-sdk"
 import { useEffect } from "react"
-import { useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import styled from "styled-components"
+import useUserEarnings from "../../core/hooks/useUserEarnings"
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor"
 
 export function UserEarningsFeatures () {
 
-    const [user, setUser] = useState<User.Detailed>()
+    const { user, error, fetchUserEarnings } = useUserEarnings()
 
-    const [error, setError] = useState<Error>()
+    const userId = 6
 
     useEffect(() => {
-        UserService.getDetailedUser(7)
-            .then(setUser)
-            .catch(e => setError(new Error(e.message)))
-    }, [])
+        fetchUserEarnings(userId)
+    }, [fetchUserEarnings])
+
+    if(error)
+        throw error
 
     if(!user)
         return <UserEaningsFeaturesWrapper style={{ height: '123px' }}>
