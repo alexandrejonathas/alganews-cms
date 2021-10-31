@@ -1,9 +1,8 @@
-import { Post, PostService } from 'alexandrejonathas-alganews-sdk';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components'
 import withBoundary from "../../core/hoc/withBoundary";
+import useSinglePost from '../../core/hooks/useSinglePost';
 import confirm from '../../core/utils/confirm';
-import info from '../../core/utils/info';
 import modal from '../../core/utils/modal';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
@@ -15,13 +14,7 @@ interface PostPreviewProps {
 
 function PostPreview (props: PostPreviewProps) {
 
-  const [post, setPost] = useState<Post.Detailed>()
-  const [loading, setLoading] = useState(false)
-
-  async function publish() {
-    await PostService.publish(props.postId)
-    info({title: 'Publicação de post', content: 'Post publicdo com sucesso'})
-  }
+  const { post, loading, fetchPost, publishPost } = useSinglePost()
 
   function reopenModal() {
     modal({
@@ -30,11 +23,8 @@ function PostPreview (props: PostPreviewProps) {
   }
 
   useEffect(() => {
-    setLoading(true)
-    PostService.getExistingPost(props.postId)
-      .then(setPost)
-      .finally(() => setLoading(false))
-  }, [props.postId])
+    fetchPost(props.postId)
+  }, [fetchPost, props.postId])
 
   if(loading)
     return <Loading show={loading} />
@@ -53,7 +43,7 @@ function PostPreview (props: PostPreviewProps) {
           onClick={() => {
             confirm({
               title: 'Deseja publicar o post?',
-              onConfirm: publish,
+              onConfirm: () => publishPost(props.postId),
               onCancel: reopenModal
             })
           }}
