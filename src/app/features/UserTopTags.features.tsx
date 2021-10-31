@@ -1,21 +1,16 @@
-import { Metric, MetricService } from "alexandrejonathas-alganews-sdk";
 import { useEffect } from "react";
-import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
+import useTopTags from "../../core/hooks/useTopTags";
 import CircleChart from "../components/CircleChart";
 
 export default function UserTopTagsFeatures () {
 
-    const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([])
-
-    const [error, setError] = useState<Error>()
+    const { topTags, error, fetchTopTags } = useTopTags()
 
     useEffect(() => {
-        MetricService.getTop3Tags()
-            .then(setTopTags)
-            .catch(e => setError(new Error(e.message)))
-    }, [])
+        fetchTopTags()
+    }, [fetchTopTags])
 
     if(error)
         throw error
@@ -32,7 +27,7 @@ export default function UserTopTagsFeatures () {
             topTags.map((tag, index) => {
                 return <CircleChart
                     key={index} 
-                    theme={index == 0 ? 'primary' : 'default'} 
+                    theme={index === 0 ? 'primary' : 'default'} 
                     size={88} 
                     caption={tag.tagName}     
                     progress={tag.percentage} 
